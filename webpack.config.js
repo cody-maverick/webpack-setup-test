@@ -1,11 +1,21 @@
 const path = require("path");
+const fs = require("fs");
+
+let entriesPoints = {};
+let entriesFolder = path.join(__dirname, "/src/modules/_imports"); // Папка файлов иморта
+
+// Читаем имена файлов импорта
+const entriesFiles = fs.readdirSync(entriesFolder);
+
+// Создаем объект с точками входа
+entriesFiles.map(item => {
+    let entryName = item.split(".")[0];
+    let entryPath = `${entriesFolder}/${entryName}.js`;
+    entriesPoints[`${entryName}`] = entryPath;
+});
 
 module.exports = {
-    entry: {
-        global: './src/modules/global.js',
-        cart: './src/modules/cart.js',
-        catalog: './src/modules/catalog.js'
-    },
+    entry: entriesPoints,
     output: {
         path: path.join(__dirname, "/public"),
         filename: "[name].bundle.js"
