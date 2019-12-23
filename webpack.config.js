@@ -8,9 +8,9 @@ let entriesFolder = path.join(__dirname, "/src/modules/_imports"); // Папка
 const entriesFiles = fs.readdirSync(entriesFolder);
 
 // Создаем объект с точками входа
-entriesFiles.map(item => {
-    let entryName = item.split(".")[0];
-    let entryPath = `${entriesFolder}/${entryName}.js`;
+entriesFiles.forEach(item => {
+    let entryName = item.split(".")[0],
+        entryPath = entryName === '_global' ? ['babel-polyfill', `${entriesFolder}/${item}`] : `${entriesFolder}/${item}`;
     entriesPoints[`${entryName}`] = entryPath;
 });
 
