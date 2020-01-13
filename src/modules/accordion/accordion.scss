@@ -1,4 +1,12 @@
+@svg-load nav url(camera.svg) {
+  path:first-child {
+    fill: #eee;
+  }
+}
+
 body {
+  //transform: scale(1);
   font-size: 28px;
-  color: red;
+  background-color: blue;
+  background: svg-inline(nav);
 }

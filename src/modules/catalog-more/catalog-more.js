@@ -1,1 +1,1 @@
-console.log('vue-catalog-more');
+console.log('catalog-more');

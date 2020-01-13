@@ -1,1 +1,1 @@
-console.log('vue-catalog-actions');
+console.log('catalog-actions');

@@ -22,7 +22,7 @@ let vueEntriesFolder = path.join(__dirname, "/src/vue"); // Папка моду�
 let vueModules = fs.readdirSync(vueEntriesFolder); // Читаем папку модулей vue
 vueModules.forEach(item => {
     let vueModuleItem = `${vueEntriesFolder}/${item}`;
-    vueEntriesPoints[`${item}`] = `${vueModuleItem}/index.js`;
+    vueEntriesPoints[`vue.${item}`] = `${vueModuleItem}/index.js`;
 })
 
 // Итоговые точки входа
@@ -68,12 +68,7 @@ module.exports = {
                             sourceMap: IS_DEV,
                         }
                     },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: IS_DEV
-                        }
-                    },
+                    'sass-loader',
                     'postcss-loader'
                 ]
             },
@@ -89,12 +84,7 @@ module.exports = {
                             sourceMap: IS_DEV,
                         }
                     },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: IS_DEV
-                        }
-                    },
+                    'sass-loader',
                     'postcss-loader'
                 ]
             }
