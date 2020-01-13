@@ -1,8 +1,10 @@
-import Vue from 'vue'
-import App from './App/app.vue';
+import Vue
+    from 'vue'
+import App
+    from './App/app.vue';
 
 const log = () => {
-    console.log('es6')
+    console.log('es11')
 }
 
 log();
