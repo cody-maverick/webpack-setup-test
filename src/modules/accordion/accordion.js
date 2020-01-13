@@ -1,2 +1,2 @@
-import './accordion.less'
+import './accordion.scss'
 console.log('accrodion');

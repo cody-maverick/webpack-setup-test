@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "watch": "cross-env NODE_ENV=development webpack -w"
   },
   "author": "",
   "license": "ISC",
@@ -14,16 +16,18 @@
     "@babel/preset-env": "^7.7.7",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
-    "css-loader": "^3.4.0",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.4.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.1.1",
+    "style-loader": "^1.1.2",
     "vue": "^2.6.11",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.41.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  }
+  },
+  "dependencies": {}
 }

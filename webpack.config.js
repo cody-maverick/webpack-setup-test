@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const VueLoaderPlugin = require('vue-loader/lib/plugin'); // плагин для загрузки кода Vue
 
-let entriesPoints = {};
+let entriesPoints = {}; // Объект точек входа
 let entriesFolder = path.join(__dirname, "/src/modules/_imports"); // Папка файлов иморта
 
 // Читаем имена файлов импорта
@@ -15,13 +15,25 @@ entriesFiles.forEach(item => {
     entriesPoints[`${entryName}`] = entryPath;
 });
 
+// Добавляем точки входа vue модулей
+let vueEntriesPoints = {};
+let vueEntriesFolder = path.join(__dirname, "/src/vue"); // Папка модулей vue
 
-// Добавляем точки vue
-console.log(entriesPoints);
-entriesPoints['vue'] = path.join(__dirname, "/src/vue/cabinet/index.js");
-console.log(entriesPoints);
+let vueModules = fs.readdirSync(vueEntriesFolder); // Читаем папку модулей vue
+vueModules.forEach(item => {
+    let vueModuleItem = `${vueEntriesFolder}/${item}`;
+    vueEntriesPoints[`${item}`] = `${vueModuleItem}/index.js`;
+})
+
+// Итоговые точки входа
+entriesPoints = Object.assign(entriesPoints, vueEntriesPoints);
+
+const ENV = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+const IS_DEV = ENV === 'development';
+console.log(ENV);
 
 module.exports = {
+    mode: ENV,
     entry: entriesPoints,
     output: {
         path: path.join(__dirname, "/public"),
@@ -44,28 +56,49 @@ module.exports = {
                     esModule: true
                 }
             },
-            {
-                test: /\.less$/,
-                use: [{
-                    loader: 'style-loader' // creates style nodes from JS strings
-                }, {
-                    loader: 'css-loader' // translates CSS into CommonJS
-                }, {
-                    loader: 'less-loader' // compiles Less to CSS
-                }]
-            },
+            // Сборка стилей для vue
             {
                 test: /\.scss$/,
                 exclude: path.join(__dirname, "/src/modules/"),
                 use: [
                     'vue-style-loader',
-                    'css-loader',
-                    'sass-loader'
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: IS_DEV,
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: IS_DEV
+                        }
+                    }
+                ]
+            },
+            // Сборка стилей для js модулей
+            {
+                test: /\.scss$/,
+                exclude: path.join(__dirname, "/src/vue/"),
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: IS_DEV,
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: IS_DEV
+                        }
+                    }
                 ]
             }
         ]
     },
-    devtool: 'inline-source-map',
+    devtool: IS_DEV === true ? 'source-map' : false,
     plugins: [
         new VueLoaderPlugin()
     ]
