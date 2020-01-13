@@ -10,7 +10,7 @@
         name: 'app',
         data () {
             return {
-                message: 'Welcome to Vue.js'
+                message: 'Welcome to Vue'
             }
         }
     }
