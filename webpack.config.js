@@ -73,7 +73,8 @@ module.exports = {
                         options: {
                             sourceMap: IS_DEV
                         }
-                    }
+                    },
+                    'postcss-loader'
                 ]
             },
             // Сборка стилей для js модулей
@@ -93,7 +94,8 @@ module.exports = {
                         options: {
                             sourceMap: IS_DEV
                         }
-                    }
+                    },
+                    'postcss-loader'
                 ]
             }
         ]
