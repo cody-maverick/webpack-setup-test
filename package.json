@@ -12,19 +12,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
     "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
+    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^6.0.3",
-    "css-loader": "^3.4.1",
+    "css-loader": "^3.4.2",
     "less-loader": "^5.0.0",
     "node-sass": "^4.13.0",
     "postcss-inline-svg": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-safe-parser": "^4.0.1",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "style-loader": "^1.1.2",
     "vue": "^2.6.11",
     "vue-loader": "^15.4.2",
@@ -34,5 +35,6 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "dependencies": {}
 }
