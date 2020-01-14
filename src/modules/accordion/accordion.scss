@@ -5,6 +5,8 @@
 }
 
 body {
+  transform: rotate(10deg);
+  display: flex;
   font-size: 28px;
   background-color: blue;
   background: svg-inline(nav);

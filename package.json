@@ -1,5 +1,5 @@
 {
-  "name": "work-test",
+  "name": "12storeez.bundler",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@babel/preset-env": "^7.8.2",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "@babel/register": "^7.8.3",
     "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
@@ -33,9 +33,5 @@
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  },
-  "browserslist": [
-    "defaults"
-  ],
-  "dependencies": {}
+  }
 }
