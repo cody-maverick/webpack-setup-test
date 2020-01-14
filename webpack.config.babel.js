@@ -30,18 +30,22 @@ vueModules.forEach(item => {
     vueEntriesPoints[`vue.${item}`] = `${vueModuleItem}/index.js`;
 })
 
-// Итоговые точки входа
+// Точки входа модулей + Точки входа vue
 entriesPoints = Object.assign(entriesPoints, vueEntriesPoints);
+
+//Добавляем точку входа для библиотек
+entriesPoints['_external'] = path.join(__dirname, "/src/scripts/imports.js");
+
 
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const IS_DEV = ENV === 'development';
-console.log(ENV);
+console.log(`${ENV} сборка`);
 
 module.exports = {
     mode: ENV,
     entry: entriesPoints,
     output: {
-        path: path.join(__dirname, "/public/js"),
+        path: path.join(__dirname, "/build/js"),
         filename: "[name].bundle.js"
     },
     module: {

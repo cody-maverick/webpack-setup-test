@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "del-cli build/* && cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
-    "watch": "cross-env NODE_ENV=development webpack -w"
+    "watch": "cross-env NODE_ENV=development webpack -w",
+    "clear": "del-cli build/*"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^6.0.3",
     "css-loader": "^3.4.2",
+    "del-cli": "^3.0.0",
     "less-loader": "^5.0.0",
     "node-sass": "^4.13.0",
     "postcss-inline-svg": "^4.1.0",
