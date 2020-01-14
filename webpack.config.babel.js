@@ -1,7 +1,11 @@
-const path = require("path");
-const fs = require('fs');
-const VueLoaderPlugin = require('vue-loader/lib/plugin'); // плагин для загрузки кода Vue
-const CopyPlugin = require('copy-webpack-plugin');
+import path
+    from 'path';
+import fs
+    from 'fs';
+import VueLoaderPlugin
+    from 'vue-loader/lib/plugin';
+import CopyPlugin
+    from 'copy-webpack-plugin';
 
 let entriesPoints = {}; // Объект точек входа
 let entriesFolder = path.join(__dirname, "/src/modules/_imports"); // Папка файлов иморта
