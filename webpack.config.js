@@ -94,6 +94,5 @@ module.exports = {
     devtool: IS_DEV === true ? 'source-map' : false,
     plugins: [
         new VueLoaderPlugin()
-    ],
-    // watch: IS_DEV
+    ]
 };
