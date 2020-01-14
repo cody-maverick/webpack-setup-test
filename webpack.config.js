@@ -37,7 +37,7 @@ module.exports = {
     mode: ENV,
     entry: entriesPoints,
     output: {
-        path: path.join(__dirname, "/public"),
+        path: path.join(__dirname, "/public/js"),
         filename: "[name].bundle.js"
     },
     module: {
@@ -93,6 +93,20 @@ module.exports = {
     },
     devtool: IS_DEV === true ? 'source-map' : false,
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyPlugin([
+            {
+                from: './src/icons',
+                to: '../icons'
+            },
+            {
+                from: './src/fonts',
+                to: '../fonts/'
+            },
+            {
+                from: './src/images',
+                to: '../images'
+            }
+        ])
     ]
 };
