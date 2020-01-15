@@ -1,5 +1,5 @@
 //external
-import './external/jquery.js'
+console.log(54454);
 import './external/jquery.lazyloadxt.extra.js'
 import './external/jquery.mousewheel.js'
 import './external/jquery-ui.js'
@@ -17,4 +17,8 @@ import './libs/nouislider.min.js'
 import './libs/pinchzoom.js'
 import './libs/slick.js'
 import './libs/sticky-sidebar.js'
+
+//libs styles
+import '../styles/main.scss'
+
 

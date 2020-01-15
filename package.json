@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "del-cli build/* && cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack",
+    "dev": "del-cli build/* && cross-env NODE_ENV=development webpack",
     "watch": "cross-env NODE_ENV=development webpack -w",
     "clear": "del-cli build/*"
   },
@@ -23,7 +23,8 @@
     "cross-env": "^6.0.3",
     "css-loader": "^3.4.2",
     "del-cli": "^3.0.0",
-    "less-loader": "^5.0.0",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.0",
     "postcss-inline-svg": "^4.1.0",
     "postcss-loader": "^3.0.0",
@@ -35,5 +36,8 @@
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
   }
 }

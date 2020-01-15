@@ -1,2 +1,6 @@
 import './accordion.scss'
-console.log('accrodion');
+console.log('accrodion', $, jQuery);
+
+jQuery('body').css({
+    backgroundColor: 'blue'
+})

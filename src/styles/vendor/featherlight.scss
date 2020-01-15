@@ -1,0 +1,172 @@
+/**
+ * Featherlight – ultra slim jQuery lightbox
+ * Version 1.5.0 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+@media all {
+  .featherlight {
+    display: none;
+
+    /* dimensions: spanning the background from edge to edge */
+    position:fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 999999; /* z-index needs to be >= elements on the site. */
+    // z-index: 25;
+    /* position: centering content */
+    text-align: center;
+
+    /* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+    white-space: nowrap;
+
+    /* styling */
+    cursor: pointer;
+    background: #333;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .featherlight:before {
+    /* position: trick to center content vertically */
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+
+  .featherlight .featherlight-content {
+    /* make content container for positioned elements (close button) */
+    position: relative;
+
+    /* position: centering vertical and horizontal */
+    text-align: left;
+    vertical-align: middle;
+    display: inline-block;
+
+    /* dimensions: cut off images */
+    overflow: auto;
+
+    /* dimensions: handling large content */
+    margin-left: 5%;
+    margin-right: 5%;
+    max-height: 95%;
+
+    /* styling */
+    background: #fff;
+    cursor: auto;
+
+    /* reset white-space wrapping */
+    white-space: normal;
+    min-width: 290px;
+    min-height: 200px;
+
+    padding: rem(30px);
+
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    @include mq($from: tablet) {
+      padding: rem(33px) rem(78px) rem(55px);
+    }
+  }
+
+  .featherlight-loading .featherlight-content {
+    text-align: center;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      top: 50%;
+      left: 50%;
+      background: $brown-light-color;
+      animation: rotateplane 1.6s infinite ease-in-out;
+    }
+    @keyframes rotateplane {
+      0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+      }
+      50% {
+        transform: perspective(120px) rotateX(-180.1deg)rotateY(0deg)
+      }
+      100% {
+        transform: perspective(120px) rotateX(-180deg)rotateY(-179.9deg)
+      }
+    }
+  }
+
+  /* contains the content */
+  .featherlight .featherlight-inner {
+    /* make sure its visible */
+    display: block;
+  }
+
+  .featherlight .featherlight-close-icon {
+    position: absolute;
+    z-index: 9999;
+    top: 27px;
+    right: 30px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    background: #fff;
+    font-size: 0;
+    transform: rotate(45deg);
+
+    &:before, &:after  {
+      content: '';
+      background: $brown-color;
+      position: absolute;
+    }
+
+    &:before {
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      transform: translateX(-50%);
+    }
+
+    &:after {
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      transform: translateY(-50%);
+    }
+  }
+
+
+  .featherlight .featherlight-image {
+    /* styling */
+    width: 100%;
+  }
+
+
+  // .featherlight-iframe .featherlight-content {
+  //   /* removed the border for image croping since iframe is edge to edge */
+  //   border-bottom: 0;
+  //   padding: 0;
+  // }
+
+  .featherlight iframe {
+    /* styling */
+    border: none;
+  }
+
+  .featherlight * {
+    box-sizing: border-box;
+  }
+}
+
+/* handling phones and small screens */
+@media only screen and (max-width: 1024px) {
+  .featherlight .featherlight-content {
+    /* dimensions: maximize lightbox with for small screens */
+    margin-left: 10px;
+    margin-right: 10px;
+    max-height: 98%;
+  }
+}

@@ -1,0 +1,6 @@
+@import 'mixins';
+
+@include font-face('Cera Pro', '../fonts/', 'CeraPro-Light', 300, 'normal');
+@include font-face('Cera Pro', '../fonts/', 'CeraPro-Regular', 400, 'normal');
+@include font-face('Cera Pro', '../fonts/', 'CeraPro-Medium', 500, 'normal');
+@include font-face('Cera Pro', '../fonts/', 'CeraPro-Bold', 700, 'normal');

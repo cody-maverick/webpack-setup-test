@@ -1,0 +1,139 @@
+html {
+  @include rem-baseline;
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: auto;
+  height: 100%;
+  overflow-y: scroll;
+
+  &.t-main {
+    height: 100%;
+  }
+
+  &.t-instagram {
+    padding-top: 64px;
+  }
+
+  &.t-fixed-menu , &.t-main, &.t-popup, &.t-zoom {
+    overflow: hidden;
+
+    @include mq($from: tablet) {
+      overflow-y: scroll;
+    }
+  }
+}
+
+* {
+  -webkit-overflow-scrolling: auto !important;
+}
+
+body {
+	font-family: $base-font-family;
+	@include rem(font-size, 14px);
+	line-height: 1.4;
+  letter-spacing: $letter-spacing;
+	font-weight: 400; 
+	color: $text-color;
+  height: 100%;
+  background: #fff;
+  transition: background 1s;
+
+  .t-fixed-menu & , .t-main &, .t-popup &, .t-zoom & {
+    overflow: hidden;
+  }
+
+  .g-states__scroll--disabled &{
+    overflow: hidden;
+  }
+
+  .t-main & {
+    height: 100%;
+    overflow: hidden;
+  }
+  .t-gray-bg & {
+    @include mq($from: tablet) {
+      background: #fbfbfc;
+    }
+  }
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+.lt-label-mobile {
+  display: block !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: all 0s ease 0s !important;
+  .t-open-menu & {
+    display: none !important;
+  }
+  &.lt-label-hidden {
+    overflow: visible !important;
+    display: none !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+
+.lt-widget-wrap {
+  .t-open-menu & {
+    display: none !important;
+  }  
+}
+
+.lt-label {
+  z-index: 5 !important;
+}
+
+
+.video {
+  position: relative;
+  background-color: #000;
+  max-width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  cursor: pointer;
+  @include mq(500px) {
+    max-width: 400px;
+  }
+}
+
+*::-webkit-media-controls-panel {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
+/* Old shadow dom for play button */
+
+*::-webkit-media-controls-play-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works */
+
+*::-webkit-media-controls-start-playback-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
+.lt-menu-fix-adaptive-scroll {
+  position: static !important;
+}
+
+.lazy {
+  display: none;
+}
+.lazy-hidden {
+  opacity: 0;
+}
+.lazy-loaded {
+  transition: opacity 0.3s;
+  opacity: 1 !important;
+}

@@ -10,7 +10,7 @@
         load_error = 'load error',
         classLazyHidden = 'lazy-hidden',
         docElement = document.documentElement || document.body,
-    //  force load all images in Opera Mini and some mobile browsers without scroll event or getBoundingClientRect()
+        //  force load all images in Opera Mini and some mobile browsers without scroll event or getBoundingClientRect()
         forceLoad = (window.onscroll === undefined || !!window.operamini || !docElement.getBoundingClientRect),
         options = {
             autoInit: true, // auto initialize in $.ready
@@ -47,11 +47,11 @@
         },
         elements = [],
         topLazy = 0,
-    /*
-     waitingMode=0 : no setTimeout
-     waitingMode=1 : setTimeout, no deferred events
-     waitingMode=2 : setTimeout, deferred events
-     */
+        /*
+         waitingMode=0 : no setTimeout
+         waitingMode=1 : setTimeout, no deferred events
+         waitingMode=2 : setTimeout, deferred events
+         */
         waitingMode = 0;
 
     $[lazyLoadXT] = $extend(options, elementOptions, $[lazyLoadXT]);
@@ -310,35 +310,3 @@
     });
 
 })(window.jQuery || window.Zepto || window.$, window, document);
-
-
-(function ($) {
-    var options = $.lazyLoadXT;
-
-    options.selector += ',video[data-poster],iframe[data-src]';
-    options.videoPoster = 'data-poster';
-
-    $(document).on('lazyshow', 'video[data-poster]', function (e, $el) {
-        var srcAttr = $el.lazyLoadXT.srcAttr,
-            isFuncSrcAttr = $.isFunction(srcAttr),
-            changed = false;
-
-        $el.attr('poster', $el.attr(options.videoPoster));
-        $el.children('source,track')
-            .each(function (index, el) {
-                var $child = $(el),
-                    src = isFuncSrcAttr ? srcAttr($child) : $child.attr(srcAttr);
-                if (src) {
-                    $child.attr('src', src);
-                    changed = true;
-                }
-            });
-
-        // reload video
-        if (changed) {
-            this.load();
-            $el.removeClass(options.classLazyHidden);
-        }
-    });
-
-})(window.jQuery || window.Zepto || window.$);

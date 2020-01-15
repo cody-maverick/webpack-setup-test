@@ -1,0 +1,108 @@
+@mixin font-face($name, $path, $filename, $weight:normal, $style:normal) {
+  @font-face {
+    font-family: $name;
+    src: url($path + $filename + '.eot');
+    src: url($path + $filename + '.eot?#iefix') format('embedded-opentype'),
+         url($path + $filename + '.woff2') format('woff2'),
+         url($path + $filename + '.woff') format('woff'),
+         url($path + $filename + '.ttf') format('truetype'),
+         url($path + $filename + '.svg#' + $filename) format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+@import 'rem';
+
+@function em($pixels, $context: $base-font-size) {
+  @return #{$pixels/$context}em;
+}
+
+@mixin holder {
+  margin-left: auto;
+	margin-right: auto;
+	min-width: 290px;
+  max-width: 1920px;
+	box-sizing: border-box;
+	padding-left: rem(14px);
+	padding-right: rem(14px);
+  @include mq($from: tablet) {
+    padding-left: rem(40px);
+    padding-right: rem(40px);
+  }
+}
+
+@mixin transform($transforms...) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  -o-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin transform-origin($origin) {
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($property...) {
+  -webkit-transition-property: $property;
+  -moz-transition-property: $property;
+  -ms-transition-property: $property;
+  -o-transition-property: $property;
+  transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+  -webkit-transition-duration: $duration;
+  -moz-transition-duration: $duration;
+  -ms-transition-duration: $duration;
+  -o-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+@mixin transition-timing-function($name...) {
+  -webkit-transition-timing-function: $name;
+  -moz-transition-timing-function: $name;
+  -ms-transition-timing-function: $name;
+  -o-transition-timing-function: $name;
+  transition-timing-function: $name;
+}
+
+@mixin transition-delay($delay...){
+  transition-delay: $delay;
+}
+
+@mixin animation($animation) {
+  -o-animation: $animation;
+  -moz-animation: $animation;
+  -webkit-animation: $animation;
+  animation: $animation;
+}

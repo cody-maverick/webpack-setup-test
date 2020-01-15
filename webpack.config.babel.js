@@ -6,6 +6,10 @@ import VueLoaderPlugin
     from 'vue-loader/lib/plugin';
 import CopyPlugin
     from 'copy-webpack-plugin';
+import webpack
+    from 'webpack';
+// import MiniCssExtractPlugin
+//     from 'mini-css-extract-plugin'
 
 let entriesPoints = {}; // Объект точек входа
 let entriesFolder = path.join(__dirname, "/src/modules/_imports"); // Папка файлов иморта
@@ -36,6 +40,8 @@ entriesPoints = Object.assign(entriesPoints, vueEntriesPoints);
 //Добавляем точку входа для библиотек
 entriesPoints['_external'] = path.join(__dirname, "/src/scripts/imports.js");
 
+entriesPoints['_external.css'] = require(__dirname + "/src/modules/**/*.scss");
+
 
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const IS_DEV = ENV === 'development';
@@ -48,14 +54,17 @@ module.exports = {
         path: path.join(__dirname, "/build/js"),
         filename: "[name].bundle.js"
     },
+    // externals: {
+    //     jquery: 'jQuery',
+    // },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [path.join(__dirname, "/node_modules/")],
                 use: {
                     loader: "babel-loader"
-                },
+                }
             },
             {
                 test: /\.vue$/,
@@ -65,10 +74,18 @@ module.exports = {
                     esModule: true
                 }
             },
+            // {
+            //     test: /jquery.+\.js$/,
+            //     use: [{
+            //         loader: 'expose-loader',
+            //         options: '$'
+            //     }],
+            //
+            // },
             // Сборка стилей для vue
             {
                 test: /\.scss$/,
-                exclude: path.join(__dirname, "/src/modules/"),
+                exclude: [path.join(__dirname, "/src/modules/"), path.join(__dirname, "/src/styles/")],
                 use: [
                     'vue-style-loader',
                     {
@@ -84,7 +101,7 @@ module.exports = {
             // Сборка стилей для js модулей
             {
                 test: /\.scss$/,
-                exclude: path.join(__dirname, "/src/vue/"),
+                exclude: [path.join(__dirname, "/src/vue/"), path.join(__dirname, "/src/styles/")],
                 use: [
                     'style-loader',
                     {
@@ -96,8 +113,55 @@ module.exports = {
                     'sass-loader',
                     'postcss-loader'
                 ]
-            }
-        ]
+            },
+            // Сборка стилей для библиотек
+            // {
+            //     test: /\.(sa|sc|c)ss$/,
+            //     exclude: [path.join(__dirname, "/src/modules/"), path.join(__dirname, "/src/vue/")],
+            //     use: [
+            //         {
+            //             loader: MiniCssExtractPlugin.loader,
+            //             options: {
+            //                 hmr: process.env.NODE_ENV === 'development',
+            //             },
+            //         },
+            //         'css-loader',
+            //         'sass-loader',
+            //         'postcss-loader',
+            //     ],
+            // },
+            {
+                test: /\.scss$/,
+                exclude: [path.join(__dirname, "/src/modules/"), path.join(__dirname, "/src/vue/")],
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: IS_DEV,
+                        }
+                    },
+                    'sass-loader',
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: '../fonts',
+                },
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: '../images',
+                },
+            },
+        ],
     },
     devtool: IS_DEV === true ? 'source-map' : false,
     plugins: [
@@ -108,13 +172,19 @@ module.exports = {
                 to: '../icons'
             },
             {
-                from: './src/fonts',
-                to: '../fonts/'
+                from: './src/scripts/external/jquery.js',
+                to: '../js/'
             },
-            {
-                from: './src/images',
-                to: '../images'
-            }
-        ])
+        ]),
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery',
+        //     jQuery: 'jquery'
+        // })
+        // new MiniCssExtractPlugin({
+        //     // Options similar to the same options in webpackOptions.output
+        //     // both options are optional
+        //     filename: '[name].css',
+        //     chunkFilename: '[id].css',
+        // }),
     ]
 };
