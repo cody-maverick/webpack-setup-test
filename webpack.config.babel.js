@@ -1,11 +1,11 @@
 import path
-    from 'path';
+    from 'path'
 import fs
-    from 'fs';
+    from 'fs'
 import VueLoaderPlugin
-    from 'vue-loader/lib/plugin';
+    from 'vue-loader/lib/plugin'
 import CopyPlugin
-    from 'copy-webpack-plugin';
+    from 'copy-webpack-plugin'
 import webpack
     from 'webpack';
 // import MiniCssExtractPlugin
@@ -40,7 +40,7 @@ entriesPoints = Object.assign(entriesPoints, vueEntriesPoints);
 //Добавляем точку входа для библиотек
 entriesPoints['_external'] = path.join(__dirname, "/src/scripts/imports.js");
 
-entriesPoints['_external.css'] = require(__dirname + "/src/modules/**/*.scss");
+// entriesPoints['_external.css'] = require(__dirname + "/src/modules/**/*.scss");
 
 
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : 'development';
