@@ -163,6 +163,23 @@ module.exports = {
             },
         ],
     },
+    optimization: {
+        minimize: !IS_DEV,
+        minimizer: [
+            new TerserPlugin(),
+            new OptimizeCSSAssetsPlugin(),
+        ],
+        namedChunks: true,
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                },
+            },
+        },
+    },
     devtool: IS_DEV === true ? 'source-map' : false,
     plugins: [
         new VueLoaderPlugin(),
